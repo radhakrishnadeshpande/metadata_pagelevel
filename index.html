@@ -128,17 +128,54 @@
                     <select class="select-language" multiple onchange="updateLanguage(${index}, this)">
                         ${generateLanguageOptions(row.attributes.language)}
                     </select>
-                </div>    
+                </div>
+
+                <div class="attribute-row">
+                    <label class="attribute-label">Where the image is uploaded? </label>
+                    <div>
+                        <label class="radio-inline"><input type="radio" name="whereimageuploaded${index}" value="Dev" onchange="updateCSVData(${index}, 'whereimageuploaded', 'Dev')"> Dev</label>
+                        <label class="radio-inline"><input type="radio" name="whereimageuploaded${index}" value="Test" onchange="updateCSVData(${index}, 'whereimageuploaded', 'Test')">Test</label>
+                        <label class="radio-inline"><input type="radio" name="whereimageuploaded${index}" value="Other" onchange="showCustomInput(${index}, 'whereimageuploaded')"> Other</label>
+                        <input type="text" id="customWhereimageuploaded${index}" class="custom-input" placeholder="Specify other" onblur="updateCustomValue(${index}, 'whereimageuploaded', this.value)">
+                    </div>
+                </div>
+
+                <div class="attribute-row">
+                    <label class="attribute-label">Method of Scannings</label>
+                    <div>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="Flat-bed Scanner" onchange="updateCSVData(${index}, 'methodofscanning', 'Flat-bed Scanner')"> Flat-bed Scanner</label>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="Book Scanner (2 pages)" onchange="updateCSVData(${index}, 'methodofscanning', 'Book Scanner (2 pages)')"> Book Scanner (2 pages)</label>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="Mobile Camera" onchange="updateCSVData(${index}, 'methodofscanning', 'Mobile Camera')"> Mobile Camera</label>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="Hi-Res Digital Camera" onchange="updateCSVData(${index}, 'methodofscanning', 'Hi-Res Digital Camera')"> Hi-Res Digital Camera</label>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="Screenshot" onchange="updateCSVData(${index}, 'methodofscanning', 'Screenshot')"> Screenshot</label>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="Digital Archive" onchange="updateCSVData(${index}, 'methodofscanning', 'Digital Archive')"> Digital Archive</label>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="PDF" onchange="updateCSVData(${index}, 'methodofscanning', 'PDF')">PDF</label>
+                        <label class="radio-inline"><input type="radio" name="methodofscanning${index}" value="Others" onchange="showCustomInput(${index}, 'methodofscanning')">Other</label>
+
+                        <input type="text" id="customMethodofscanning${index}" class="custom-input" placeholder="Specify other" onblur="updateCustomValue(${index}, 'methodofscanning', this.value)">
+                    </div>
+                </div>
+
+                <div class="attribute-row">
+                    <label class="attribute-label">Source of Pages?</label>
+                    <div>
+                        <label class="radio-inline"><input type="radio" name="sourceofpages${index}" value="Library" onchange="updateCSVData(${index}, 'sourceofpage', 'Library')"> Library</label>
+                        <label class="radio-inline"><input type="radio" name="sourceofpage${index}" value="Internet Archive" onchange="updateCSVData(${index}, 'sourceofpage', 'Internet Archive')"> Internet Archive</label>
+                        <label class="radio-inline"><input type="radio" name="sourceofpage${index}" value="Others" onchange="showCustomInput(${index}, 'sourceofpage')">Other</label>
+                        <input type="text" id="customSourceofpage${index}" class="custom-input" placeholder="Specify other" onblur="updateCustomValue(${index}, 'sourceofpage', this.value)">
+                    </div>
+                </div>
+
                 <div class="attribute-row">
                     <label class="attribute-label">Page contains Graphics?</label>
                     ${generateRadioField(index, 'graphics')}
                 </div>
-                
+
                 <div class="attribute-row">
                     <label class="attribute-label">Page contains Tables?</label>
                     ${generateRadioField(index, 'tables')}
                 </div>
-                
+
                 <div class="attribute-row">
                     <label class="attribute-label">Page contains Equations?</label>
                     ${generateRadioField(index, 'equations')}
@@ -153,6 +190,8 @@
                     <label class="attribute-label">Page contains Handwritten Text?</label>
                     ${generateRadioField(index, 'handwritten')}
                 </div>
+
+                
 
                 <div class="attribute-row">
                     <label class="attribute-label">Number of Text Columns</label>
@@ -183,13 +222,12 @@
 
                 <div class="attribute-row">
                     <label class="attribute-label">Background Color</label>
-                     <label class="attribute-label">Background(Text) Color</label>
                     <div>
-                        <label class="radio-inline"><input type="radio" name="backgroundColor${index}" value="Black" onchange="updateCSVData(${index}, 'backgroundColor', 'White')"> White</label>
-                        <label class="radio-inline"><input type="radio" name="backgroundColor${index}" value="White" onchange="updateCSVData(${index}, 'backgroundColor', 'Black')"> Black</label>
-                        <label class="radio-inline"><input type="radio" name="backgrounddColor${index}" value="Other" onchange="showCustomInput(${index}, 'backgroundColor')"> Other</label>
+                        <label class="radio-inline"><input type="radio" name="backgroundColor${index}" value="Black" onchange="updateCSVData(${index}, 'backgroundColor', 'Black')"> Black</label>
+                        <label class="radio-inline"><input type="radio" name="backgroundColor${index}" value="White" onchange="updateCSVData(${index}, 'backgroundColor', 'White')"> White</label>
+                        <label class="radio-inline"><input type="radio" name="backgroundColor${index}" value="Other" onchange="showCustomInput(${index}, 'backgroundColor')"> Other</label>
                         <input type="text" id="customBackgroundColor${index}" class="custom-input" placeholder="Specify other" onblur="updateCustomValue(${index}, 'backgroundColor', this.value)">
-                    </div>                
+                    </div>
                 </div>
 
                 <div class="attribute-row">
@@ -208,22 +246,6 @@
 
         function updateLanguage(index, selectElement) {
             csvData[index].attributes.language = Array.from(selectElement.selectedOptions).map(option => option.value);
-        }
-
-        function toggleLanguage(index, lang) {
-            const languages = csvData[index].attributes.language;
-            const langIndex = languages.indexOf(lang);
-            if (langIndex > -1) {
-                languages.splice(langIndex, 1);
-            } else {
-                languages.push(lang);
-            }
-            csvData[index].attributes.language = languages;
-        }
-
-        function toggleDropdown(index) {
-            const dropdown = document.querySelector(`.multi-select-dropdown:nth-of-type(${index + 1})`);
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
         function generateRadioField(index, field) {
@@ -263,11 +285,30 @@
 
         function downloadEditedCSV() {
             let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Image Name,Language,Graphics,Tables,Equations,Watermark,Handwritten,Columns,Colored Text,Foreground Color,Background Color,Text Quality\n";
+            csvContent += "Image Name,Language,Where the image is uploaded?,Method of scanning,Source of Page,Graphics,Tables,Equations,Watermark,Handwritten,Columns,Colored Text,Foreground Color,Background Color,Text Quality,Page Link\n";
 
             csvData.forEach(row => {
                 const { imageName, attributes } = row;
-                csvContent += `${imageName},"${attributes.language.join(';')}",${attributes.graphics},${attributes.tables},${attributes.equations},${attributes.watermark},${attributes.handwritten},${attributes.columns},${attributes.coloredText},${attributes.foregroundColor},${attributes.backgroundColor},${attributes.textQuality}\n`;
+
+                // Extract the base name without extension
+                const baseImageName = imageName.replace(/\.[^/.]+$/, "");
+
+                // Default to 'Dev' if 'whereimageuploaded' is not set
+                if (!attributes.whereimageuploaded) {
+                    attributes.whereimageuploaded = 'Dev';
+                }
+
+                let pageLink;
+                if (attributes.whereimageuploaded === 'Test') {
+                    pageLink = `https://ilocr.iiit.ac.in/ocr_testing/upload/${baseImageName}/`;
+                } else if (attributes.whereimageuploaded === 'Dev') {
+                    pageLink = `http://10.4.16.36:8000/ocr_testing/page_detail/${baseImageName}/`;
+                } else {
+                    pageLink = attributes.whereimageuploaded || '';
+                }
+
+                
+                csvContent += `${imageName},${attributes.language.join(';') || ''},${attributes.whereimageuploaded || ''},${attributes.methodofscanning || ''},${attributes.sourceofpage || ''},${attributes.graphics || ''},${attributes.tables || ''},${attributes.equations || ''},${attributes.watermark || ''},${attributes.handwritten || ''},${attributes.columns || ''},${attributes.coloredText || ''},${attributes.foregroundColor || ''},${attributes.backgroundColor || ''},${attributes.textQuality || ''},${pageLink}\n`;
             });
 
             const encodedUri = encodeURI(csvContent);
@@ -295,6 +336,7 @@
         function goToPage(page) {
             currentPage = page;
             displayData();
+            renderPagination();
         }
 
         function previousPage() {
