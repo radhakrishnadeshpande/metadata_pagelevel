@@ -160,7 +160,7 @@
                     <label class="attribute-label">Source of Pages?</label>
                     <div>
                         <label class="radio-inline"><input type="radio" name="sourceofpages${index}" value="Library" onchange="updateCSVData(${index}, 'sourceofpage', 'Library')"> Library</label>
-                        <label class="radio-inline"><input type="radio" name="sourceofpage${index}" value="Internet Archive" onchange="updateCSVData(${index}, 'sourceofpage', 'Internet Archive')"> Internet Archive</label>
+                        <label class="radio-inline"><input type="radio" name="sourceofpage${index}" value="Online" onchange="updateCSVData(${index}, 'sourceofpage', 'Online')"> Online</label>
                         <label class="radio-inline"><input type="radio" name="sourceofpage${index}" value="Others" onchange="showCustomInput(${index}, 'sourceofpage')">Other</label>
                         <input type="text" id="customSourceofpage${index}" class="custom-input" placeholder="Specify other" onblur="updateCustomValue(${index}, 'sourceofpage', this.value)">
                     </div>
