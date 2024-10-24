@@ -285,7 +285,7 @@
 
         function downloadEditedCSV() {
             let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Image Name,Language,Where the image is uploaded?,Method of scanning,Source of Page,Graphics,Tables,Equations,Watermark,Handwritten,Columns,Colored Text,Foreground Color,Background Color,Text Quality,Page Link\n";
+            csvContent += "Page ID,Language,Where the image is uploaded?,Method of scanning,Source of Page,Graphics,Tables,Equations,Watermark,Handwritten,Columns,Colored Text,Foreground Color,Background Color,Text Quality,Page Link\n";
 
             csvData.forEach(row => {
                 const { imageName, attributes } = row;
@@ -308,7 +308,7 @@
                 }
 
                 
-                csvContent += `${imageName},${attributes.language.join(';') || ''},${attributes.whereimageuploaded || ''},${attributes.methodofscanning || ''},${attributes.sourceofpage || ''},${attributes.graphics || ''},${attributes.tables || ''},${attributes.equations || ''},${attributes.watermark || ''},${attributes.handwritten || ''},${attributes.columns || ''},${attributes.coloredText || ''},${attributes.foregroundColor || ''},${attributes.backgroundColor || ''},${attributes.textQuality || ''},${pageLink}\n`;
+                csvContent += `${baseImageName},${attributes.language.join(';') || ''},${attributes.whereimageuploaded || ''},${attributes.methodofscanning || ''},${attributes.sourceofpage || ''},${attributes.graphics || ''},${attributes.tables || ''},${attributes.equations || ''},${attributes.watermark || ''},${attributes.handwritten || ''},${attributes.columns || ''},${attributes.coloredText || ''},${attributes.foregroundColor || ''},${attributes.backgroundColor || ''},${attributes.textQuality || ''},${pageLink}\n`;
             });
 
             const encodedUri = encodeURI(csvContent);
